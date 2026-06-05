@@ -74,7 +74,8 @@ a {
   filter: blur(80px);
   opacity: 0.28;
   pointer-events: none;
-  animation: glow-drift 18s ease-in-out infinite alternate;
+  animation: glow-drift 26s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
 .ambient-one {
@@ -88,6 +89,7 @@ a {
   left: -12%;
   background: rgba(67, 95, 149, 0.42);
   animation-delay: -7s;
+  animation-duration: 32s;
 }
 
 .site-header {
@@ -134,7 +136,7 @@ a {
   letter-spacing: 0;
   text-decoration: none;
   text-transform: uppercase;
-  transition: color 180ms ease;
+  transition: color 280ms ease, transform 280ms ease;
 }
 
 .site-nav a::after {
@@ -151,6 +153,7 @@ a {
 .site-nav a:hover,
 .site-nav a.is-active {
   color: var(--text);
+  transform: translateY(-2px);
 }
 
 .site-nav a:hover::after,
@@ -240,11 +243,11 @@ a {
   letter-spacing: 0;
   text-decoration: none;
   text-transform: uppercase;
-  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  transition: transform 320ms ease, border-color 320ms ease, box-shadow 320ms ease, background 320ms ease;
 }
 
 .button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px) scale(1.01);
 }
 
 .button-primary {
@@ -260,7 +263,7 @@ a {
 
 .button-secondary:hover {
   border-color: var(--accent);
-  box-shadow: 0 0 32px rgba(103, 199, 255, 0.12);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.2), 0 0 32px rgba(103, 199, 255, 0.12);
 }
 
 .hero-visual {
@@ -421,14 +424,15 @@ a {
   background: var(--card);
   border: 1px solid var(--line);
   box-shadow: 0 18px 46px rgba(0, 0, 0, 0.24);
-  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+  transition: transform 340ms ease, border-color 340ms ease, background 340ms ease, box-shadow 340ms ease;
 }
 
 .project-card:hover,
 .breakdown-panel:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px) scale(1.01);
   border-color: var(--line-strong);
   background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 28px 68px rgba(0, 0, 0, 0.3);
 }
 
 .project-card:hover .project-placeholder::before,
@@ -442,7 +446,7 @@ a {
   flex-direction: column;
   justify-content: flex-end;
   padding: 22px;
-  transition: transform 220ms ease;
+  transition: transform 340ms ease, box-shadow 340ms ease;
 }
 
 .project-card:hover .project-placeholder {
@@ -516,7 +520,7 @@ a {
   padding: 22px;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid var(--line);
-  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+  transition: transform 340ms ease, border-color 340ms ease, background 340ms ease, box-shadow 340ms ease;
 }
 
 .breakdown-panel > p {
@@ -548,13 +552,14 @@ a {
   font-weight: 800;
   letter-spacing: 0;
   text-transform: uppercase;
-  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+  transition: transform 280ms ease, border-color 280ms ease, background 280ms ease, color 280ms ease;
 }
 
 .tool-cloud span:hover {
   color: var(--accent);
   background: rgba(103, 199, 255, 0.08);
   border-color: var(--line-strong);
+  transform: translateY(-3px);
 }
 
 .about-section {
@@ -590,11 +595,44 @@ a {
 .site-footer a {
   color: var(--text);
   text-decoration: none;
-  transition: color 180ms ease;
+  transition: color 280ms ease, transform 280ms ease;
 }
 
 .site-footer a:hover {
   color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 760ms ease, transform 760ms ease;
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 {
+  transition-delay: 80ms;
+}
+
+.reveal-delay-2 {
+  transition-delay: 160ms;
+}
+
+.reveal-delay-3 {
+  transition-delay: 240ms;
+}
+
+.reveal-delay-4 {
+  transition-delay: 320ms;
+}
+
+.reveal-delay-5 {
+  transition-delay: 400ms;
 }
 
 .footer-note {
@@ -608,7 +646,7 @@ a {
     transform: translate3d(0, 0, 0) scale(1);
   }
   to {
-    transform: translate3d(-28px, 18px, 0) scale(1.08);
+    transform: translate3d(-18px, 14px, 0) scale(1.045);
   }
 }
 
@@ -734,5 +772,30 @@ a {
 
   .breakdown-panel {
     min-height: 280px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ambient,
+  .scanline {
+    animation: none;
   }
 }
