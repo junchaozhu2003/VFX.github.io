@@ -32,6 +32,7 @@ body {
     linear-gradient(135deg, #0b0d10 0%, #10131a 52%, #080a0d 100%);
   line-height: 1.6;
   overflow-x: hidden;
+  isolation: isolate;
 }
 
 body::before {
@@ -40,11 +41,14 @@ body::before {
   inset: 0;
   z-index: -3;
   pointer-events: none;
+  opacity: 0.34;
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 75%);
+  animation: ambientGridMove 58s linear infinite;
+  will-change: background-position;
 }
 
 body::after {
@@ -53,11 +57,13 @@ body::after {
   inset: 0;
   z-index: -2;
   pointer-events: none;
-  opacity: 0.28;
+  opacity: 0.18;
   background-image:
     radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.18) 0 1px, transparent 1px),
     radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px);
   background-size: 23px 23px, 31px 31px;
+  animation: ambientNoiseDrift 64s linear infinite;
+  will-change: background-position;
 }
 
 a {
@@ -72,9 +78,9 @@ a {
   aspect-ratio: 1;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.28;
+  opacity: 0.22;
   pointer-events: none;
-  animation: glow-drift 26s ease-in-out infinite alternate;
+  animation: ambientGlowDrift 40s ease-in-out infinite alternate;
   will-change: transform;
 }
 
@@ -89,7 +95,7 @@ a {
   left: -12%;
   background: rgba(67, 95, 149, 0.42);
   animation-delay: -7s;
-  animation-duration: 32s;
+  animation-duration: 48s;
 }
 
 .site-header {
@@ -635,18 +641,44 @@ a {
   transition-delay: 400ms;
 }
 
+main,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+
 .footer-note {
   margin: 0;
   color: var(--muted);
   text-align: right;
 }
 
-@keyframes glow-drift {
+@keyframes ambientGridMove {
+  from {
+    background-position: 0 0, 0 0;
+  }
+
+  to {
+    background-position: 36px 28px, 36px 28px;
+  }
+}
+
+@keyframes ambientNoiseDrift {
+  from {
+    background-position: 0 0, 0 0;
+  }
+
+  to {
+    background-position: 28px 22px, -24px 18px;
+  }
+}
+
+@keyframes ambientGlowDrift {
   from {
     transform: translate3d(0, 0, 0) scale(1);
   }
   to {
-    transform: translate3d(-18px, 14px, 0) scale(1.045);
+    transform: translate3d(-42px, 34px, 0) scale(1.05);
   }
 }
 
@@ -794,6 +826,8 @@ a {
     transform: none;
   }
 
+  body::before,
+  body::after,
   .ambient,
   .scanline {
     animation: none;
