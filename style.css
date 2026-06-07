@@ -431,6 +431,8 @@ a {
   border: 1px solid var(--line);
   box-shadow: 0 18px 46px rgba(0, 0, 0, 0.24);
   transition: transform 340ms ease, border-color 340ms ease, background 340ms ease, box-shadow 340ms ease;
+  color: inherit;
+  text-decoration: none;
 }
 
 .project-card:hover,
@@ -457,6 +459,37 @@ a {
 
 .project-card:hover .project-placeholder {
   transform: scale(1.018);
+}
+
+.project-cover {
+  align-items: flex-start;
+}
+
+.project-cover img,
+.mini-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 14px;
+  opacity: 0.92;
+  transition: transform 420ms ease, opacity 420ms ease;
+}
+
+.project-cover::after,
+.mini-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(4, 6, 9, 0.72), rgba(4, 6, 9, 0.08) 58%, rgba(4, 6, 9, 0.22));
+}
+
+.project-card:hover .project-cover img,
+.breakdown-panel:hover .mini-image img {
+  transform: scale(1.025);
+  opacity: 1;
 }
 
 .project-placeholder span,
@@ -527,6 +560,93 @@ a {
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid var(--line);
   transition: transform 340ms ease, border-color 340ms ease, background 340ms ease, box-shadow 340ms ease;
+}
+
+.burger-project {
+  scroll-margin-top: 96px;
+}
+
+.burger-subtitle {
+  margin: -14px 0 28px;
+}
+
+.vfx-feature-image,
+.vfx-breakdown-card {
+  margin: 0;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--line);
+  box-shadow: 0 22px 62px rgba(0, 0, 0, 0.28);
+  transition: transform 340ms ease, border-color 340ms ease, box-shadow 340ms ease, background 340ms ease;
+}
+
+.vfx-feature-image {
+  display: grid;
+  gap: 18px;
+  padding: clamp(16px, 2.4vw, 26px);
+}
+
+.vfx-feature-image img,
+.vfx-breakdown-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.vfx-feature-image img {
+  max-height: 760px;
+}
+
+.vfx-feature-image:hover,
+.vfx-breakdown-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: var(--line-strong);
+  background: rgba(255, 255, 255, 0.052);
+  box-shadow: 0 30px 78px rgba(0, 0, 0, 0.34);
+}
+
+.vfx-feature-image figcaption,
+.vfx-breakdown-card figcaption {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.vfx-feature-image figcaption strong,
+.vfx-breakdown-card figcaption strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text);
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.vfx-breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 28px);
+  margin-top: 28px;
+}
+
+.vfx-breakdown-card {
+  display: grid;
+  gap: 14px;
+  padding: clamp(14px, 2vw, 20px);
+}
+
+.vfx-breakdown-card img {
+  aspect-ratio: 16 / 9.6;
+}
+
+.vfx-breakdown-card-wide {
+  grid-column: 1 / -1;
+}
+
+.vfx-breakdown-card-wide img {
+  aspect-ratio: auto;
 }
 
 .breakdown-panel > p {
@@ -727,6 +847,14 @@ main,
 
   .project-grid {
     grid-template-columns: 1fr;
+  }
+
+  .vfx-breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vfx-breakdown-card-wide {
+    grid-column: auto;
   }
 
   .breakdown-grid {
