@@ -1,6 +1,7 @@
 const header = document.querySelector("[data-header]");
 const navLinks = Array.from(document.querySelectorAll(".site-nav a[href^='#']"));
 const revealItems = document.querySelectorAll(".reveal");
+const softwareIconImages = document.querySelectorAll(".software-badge img");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
@@ -30,6 +31,13 @@ window.addEventListener("scroll", () => {
 
 updateHeaderState();
 updateActiveNav();
+
+softwareIconImages.forEach((image) => {
+  image.addEventListener("error", () => {
+    image.closest(".software-badge")?.classList.add("icon-missing");
+    image.hidden = true;
+  });
+});
 
 if (prefersReducedMotion) {
   revealItems.forEach((item) => item.classList.add("visible"));

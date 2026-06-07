@@ -716,6 +716,23 @@ a {
   text-transform: uppercase;
 }
 
+.software-badge img {
+  display: block;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  opacity: 0.88;
+  filter: saturate(0.92) contrast(1.02);
+}
+
+.software-badge .badge-fallback {
+  display: none;
+}
+
+.software-badge.icon-missing .badge-fallback {
+  display: inline;
+}
+
 .software-name {
   color: var(--text);
   font-size: 15px;
